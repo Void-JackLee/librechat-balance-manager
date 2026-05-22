@@ -1,0 +1,139 @@
+.balance-page {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.toolbar span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+  white-space: nowrap;
+}
+
+input[type="number"] {
+  width: 160px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input[type="number"]:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+button {
+  height: 36px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.balance-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.balance-table thead {
+  background: #f1f5f9;
+}
+
+.balance-table th,
+.balance-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.balance-table th {
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.balance-table td {
+  font-size: 14px;
+  color: #374151;
+}
+
+.balance-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.balance-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.balance-table td input[type="number"] {
+  width: 120px;
+}
+
+.balance-table td button {
+  background: #10b981;
+}
+
+.balance-table td button:hover {
+  background: #059669;
+}
+
+@media (max-width: 768px) {
+  .balance-page {
+    margin: 20px 12px;
+    padding: 16px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input[type="number"],
+  button {
+    width: 100%;
+  }
+
+  .balance-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

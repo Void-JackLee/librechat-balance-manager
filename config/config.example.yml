@@ -1,0 +1,4 @@
+compose-path: xxx/deploy-compose.yml
+
+exclude-email:
+  - xxx
