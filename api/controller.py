@@ -5,16 +5,25 @@ import yaml
 
 app = APIRouter()
 
-with open("config/config.yml", "r") as f:
-    config = yaml.safe_load(f)
-exclude_email = config.get("exclude-email", [])
-credit_scale = config.get("credit-scale", 1/3)
-credit_field_name = config.get("credit-field-name")
-email_field_name = config.get("email-field-name")
+exclude_email = None
+credit_scale = None
+credit_field_name = None
+email_field_name = None
+
+def load_config():
+    global exclude_email, credit_scale, credit_field_name, email_field_name
+
+    with open("config/config.yml", "r") as f:
+        config = yaml.safe_load(f)
+    exclude_email = config.get("exclude-email", [])
+    credit_scale = config.get("credit-scale", 1/3)
+    credit_field_name = config.get("credit-field-name")
+    email_field_name = config.get("email-field-name")
 
 @app.get("/list-balances")
 def _list_balances():
     # Implementation for listing balances
+    load_config()
     result = [ {"name": user.name, "email": user.email, "balance": balance.token_credits if balance else 0} for user, balance in get_balance()]
     result = [item for item in result if item["email"] not in exclude_email]
     return ok(result)
@@ -36,6 +45,7 @@ def _set_all_balances(balance: float = Form(...)):
 
 @app.post("/set-balances-from-json")
 def _set_balances_from_json(data: list[dict] = Body(...)):
+    load_config()
     emails = []
     credits = []
     for item in data:
