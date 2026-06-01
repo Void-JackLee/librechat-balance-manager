@@ -1,0 +1,9 @@
+services:
+  balance-manager:
+    build: .
+    ports:
+      - "3010:3010"
+    volumes:
+      - ./config.docker:/app/config
+
+# add balance-manager to deploy-compose.yml, and change build and volumes path from . to ../librechat-balance-manager. Finally, add depends_on: mongodb

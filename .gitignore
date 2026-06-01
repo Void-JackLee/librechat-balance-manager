@@ -36,4 +36,5 @@ wheels/
 
 # Config files
 config/config.yml
+config.docker/config.yml
 

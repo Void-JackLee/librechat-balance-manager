@@ -1,0 +1,11 @@
+credit-scale: 500000
+credit-field-name: xxx
+email-field-name: xxx
+
+db:
+  host: mongodb
+  port: 27017
+  name: LibreChat
+
+exclude-email:
+  - xxx
