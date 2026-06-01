@@ -7,3 +7,4 @@
 
 # Specific patterns to ignore
 config/config.yml
+config.docker/config.yml
