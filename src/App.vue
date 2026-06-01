@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-import { getJSON, postForm } from './util/request.js'
+import { getJSON, postForm, postJSON } from './util/request.js'
 
 interface User {
   name: string
@@ -10,6 +10,8 @@ interface User {
 
 const users = reactive<User[]>([])
 const all_balance = ref<string>()
+const balance_json = ref<string>()
+const is_json_dialog_open  = ref<boolean>(false)
 
 const clear_loading = (text = "Loading...") => {
   users.length = 0;
@@ -63,6 +65,32 @@ const set_balance = async (email: string, balance: number) => {
   }
 }
 
+const open_json_dialog = () => {
+  is_json_dialog_open.value = true
+  balance_json.value = ""
+}
+
+const cancel_json_dialog = () => {
+  is_json_dialog_open.value = false
+}
+
+const set_balances_from_json = async () => {
+  if (!balance_json.value) return
+  try {
+    const data = JSON.parse(balance_json.value)
+    if (!Array.isArray(data)) {
+      alert('Invalid JSON format')
+      return
+    }
+    clear_loading("Setting...")
+    await postJSON('/api/set-balances-from-json', data)
+    list_balances()
+  } catch (error: any) {
+    alert('Error setting balances from JSON:' + (error.msg || error))
+  }
+}
+
+
 onMounted(() => {
   list_balances()
 })
@@ -74,6 +102,18 @@ onMounted(() => {
       <span>一键设置所有用户金额: </span>
       <input type="number" v-model="all_balance" @keydown.enter="set_all_balances" />
       <button @click="set_all_balances">确定</button>
+      <button @click="open_json_dialog">从JSON设置</button>
+    </div>
+    <div class="toolbar json" v-if="is_json_dialog_open">
+      <div><span>从JSON设置: </span></div>
+      <div style="height: 10px"></div>
+      <div>
+        <textarea v-model="balance_json"></textarea>
+      </div>
+      <div style="margin-top: 10px">
+        <button style="margin-right: 10px; background: red" @click="cancel_json_dialog">取消</button>
+        <button @click="set_balances_from_json">确定</button>
+      </div>
     </div>
     <table class="balance-table">
       <thead>

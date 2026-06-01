@@ -19,6 +19,10 @@
   border-radius: 10px;
 }
 
+.toolbar.json {
+  display: block;
+}
+
 .toolbar span {
   font-size: 15px;
   font-weight: 600;
@@ -26,7 +30,7 @@
   white-space: nowrap;
 }
 
-input[type="number"] {
+input[type="number"], textarea {
   width: 160px;
   height: 36px;
   padding: 0 10px;
@@ -38,7 +42,14 @@ input[type="number"] {
   transition: 0.2s;
 }
 
-input[type="number"]:focus {
+textarea {
+  height: 120px;
+  padding: 10px;
+  width: calc(100% - 20px);
+  resize: vertical;
+}
+
+input[type="number"]:focus, textarea:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
 }

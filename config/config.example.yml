@@ -1,4 +1,11 @@
-compose-path: xxx/deploy-compose.yml
+credit-scale: 500000
+credit-field-name: rmb额度
+email-field-name: 邮箱
+
+db:
+  host: localhost
+  port: 27018
+  name: LibreChat
 
 exclude-email:
   - xxx
