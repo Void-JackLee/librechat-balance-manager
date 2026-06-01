@@ -7,6 +7,8 @@ requires-python = ">=3.11"
 dependencies = [
     "click>=8.4.1",
     "fastapi>=0.136.1",
+    "mongoengine>=0.29.3",
+    "pymongo>=4.17.0",
     "python-multipart>=0.0.29",
     "tqdm>=4.67.3",
     "uvicorn[standard]>=0.47.0",
