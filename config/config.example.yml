@@ -1,6 +1,6 @@
 credit-scale: 500000
-credit-field-name: rmb额度
-email-field-name: 邮箱
+credit-field-name: xxx
+email-field-name: xxx
 
 db:
   host: localhost
