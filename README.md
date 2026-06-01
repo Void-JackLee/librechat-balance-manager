@@ -1,5 +1,24 @@
-# Vue 3 + TypeScript + Vite
+# librechat-balance-manager
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Install
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+1. Add this component to `deploy-compose.yml` in `LibreChat`.
+
+    ```yml
+    balance-manager:
+    build: ../librechat-balance-manager
+    ports:
+        - "3010:3010"
+    volumes:
+        - ../librechat-balance-manager/config.docker:/app/config
+    depends_on:
+        - mongodb
+    ```
+
+2. Copy `config.example.yml` to `config.yml` in `config.docker`.
+
+    ```shell
+    cp config.docker/config.example.yml config.docker/config.yml
+    ```
+
+3. Fill the `xxx` in `config.yml` and start the `deploy-compose.yml` in `LibreChat`.
