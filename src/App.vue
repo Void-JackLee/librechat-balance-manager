@@ -12,6 +12,18 @@ const users = reactive<User[]>([])
 const all_balance = ref<string>()
 const balance_json = ref<string>()
 const is_json_dialog_open  = ref<boolean>(false)
+const json_hint = ref<string>("")
+
+const get_json_hint = async () => {
+  try {
+    const data = await getJSON('/api/get-json-field-hint')
+    let str = JSON.stringify(data.data)
+    str = str.replaceAll("[","[\n  ").replaceAll("{","{\n    ").replaceAll(",",",\n    ").replaceAll("}","\n  }").replaceAll("]","\n]").replaceAll(":\"",": \"")
+    json_hint.value = str
+  } catch(error: any) {
+    alert('Error fetching balances:' + (error.msg || error))
+  }
+}
 
 const clear_loading = (text = "Loading...") => {
   users.length = 0;
@@ -92,6 +104,7 @@ const set_balances_from_json = async () => {
 
 
 onMounted(() => {
+  get_json_hint()
   list_balances()
 })
 </script>
@@ -108,7 +121,7 @@ onMounted(() => {
       <div><span>从JSON设置: </span></div>
       <div style="height: 10px"></div>
       <div>
-        <textarea v-model="balance_json"></textarea>
+        <textarea v-model="balance_json" :placeholder="json_hint"></textarea>
       </div>
       <div style="margin-top: 10px">
         <button style="margin-right: 10px; background: red" @click="cancel_json_dialog">取消</button>

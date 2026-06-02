@@ -43,6 +43,15 @@ def _set_all_balances(balance: float = Form(...)):
             print(e)
     return ok()
 
+@app.get("/get-json-field-hint")
+def _get_json_field_hint():
+    load_config()
+    data = [{
+        credit_field_name: f"<credit_value> * {credit_scale}",
+        email_field_name: "<email_value>"
+    }]
+    return ok(data)
+
 @app.post("/set-balances-from-json")
 def _set_balances_from_json(data: list[dict] = Body(...)):
     load_config()
